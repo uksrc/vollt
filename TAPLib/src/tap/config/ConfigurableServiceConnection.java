@@ -50,6 +50,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -335,7 +338,7 @@ public final class ConfigurableServiceConnection implements ServiceConnection {
 	 *
 	 * @throws ParseException	If the given file path is a URI/URL.
 	 */
-	protected static final File getFile(final String filePath, final String webAppRootPath, final String propertyName) throws TAPException {
+/*	protected static final File getFile(final String filePath, final String webAppRootPath, final String propertyName) throws TAPException {
 		if (filePath == null)
 			return null;
 		else if (filePath.matches(".*:.*"))
@@ -346,6 +349,29 @@ public final class ConfigurableServiceConnection implements ServiceConnection {
 			return f;
 		else
 			return new File(webAppRootPath, filePath);
+	}*/
+
+	protected static final File getFile(final String filePath, final String webAppRootPath, final String propertyName) throws TAPException {
+		if (filePath == null) {
+			return null;
+		}
+
+		// Convert the file path into a Path object to avoid manual checks
+		Path path;
+		try {
+			path = Paths.get(filePath);
+		} catch (InvalidPathException e) {
+			throw new TAPException("Invalid file path for the property \"" + propertyName + "\": \"" + filePath + "\"! Please check the path format.", e);
+		}
+
+		// If the path is absolute, return it as a File directly
+		if (path.isAbsolute()) {
+			return path.toFile();
+		}
+
+		// Otherwise, assume it's a relative path and resolve it against the webAppRootPath
+		Path resolvedPath = Paths.get(webAppRootPath).resolve(path);
+		return resolvedPath.toFile();
 	}
 
 	/**

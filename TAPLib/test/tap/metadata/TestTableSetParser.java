@@ -10,10 +10,10 @@ import static org.junit.Assert.fail;
 import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
+import jakarta.xml.stream.XMLInputFactory;
+import jakarta.xml.stream.XMLStreamConstants;
+import jakarta.xml.stream.XMLStreamException;
+import jakarta.xml.stream.XMLStreamReader;
 
 import org.junit.After;
 import org.junit.AfterClass;

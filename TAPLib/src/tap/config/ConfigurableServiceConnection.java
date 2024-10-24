@@ -338,20 +338,7 @@ public final class ConfigurableServiceConnection implements ServiceConnection {
 	 *
 	 * @throws ParseException	If the given file path is a URI/URL.
 	 */
-/*	protected static final File getFile(final String filePath, final String webAppRootPath, final String propertyName) throws TAPException {
-		if (filePath == null)
-			return null;
-		else if (filePath.matches(".*:.*"))
-			throw new TAPException("Incorrect file path for the property \"" + propertyName + "\": \"" + filePath + "\"! URI/URLs are not expected here.");
-
-		File f = new File(filePath);
-		if (f.isAbsolute())
-			return f;
-		else
-			return new File(webAppRootPath, filePath);
-	}*/
-
-	protected static final File getFile(final String filePath, final String webAppRootPath, final String propertyName) throws TAPException {
+	static File getFile(final String filePath, final String webAppRootPath, final String propertyName) throws TAPException {
 		if (filePath == null) {
 			return null;
 		}

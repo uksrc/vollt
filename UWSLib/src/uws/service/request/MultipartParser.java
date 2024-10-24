@@ -35,6 +35,7 @@ import org.apache.commons.fileupload2.jakarta.servlet6.JakartaServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
+import org.apache.commons.io.file.PathUtils;
 import uws.UWSException;
 import uws.service.UWS;
 import uws.service.file.UWSFileManager;
@@ -210,12 +211,9 @@ public class MultipartParser implements RequestParser {
 		// Create a factory for disk-based file items:
 		DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
 
-		// Configure a repository:
-//		factory.setRepository(fileManager.getTmpDirectory());
-
-		/* Set the maximum size of an in-memory file before being stored on the
-		 * disk: */
-//		factory.setSizeThreshold(SIZE_BEFORE_DISK_STORAGE);
+		//Worth noting that setting repository is new hidden behind a private constructor which sets to default values...
+		//setBufferSize(DEFAULT_THRESHOLD);
+		//setPath(PathUtils.getTempDirectory());
 
 		// Create a new file upload handler:
 		fileUpload = new JakartaServletFileUpload(factory);

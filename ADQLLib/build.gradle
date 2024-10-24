@@ -17,7 +17,7 @@ distributions {
 }
 
 dependencies {
-    implementation 'uk.ac.starlink:stil:4.2'
+    implementation 'uk.ac.starlink:stil:4.3'
     implementation 'postgresql:postgresql:9.1-901.jdbc4'
 }
 

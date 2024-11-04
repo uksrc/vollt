@@ -26,5 +26,5 @@ dependencies {
     /* Needed to run Gradle with Java 9+: */
     implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.2'
 
-
+    implementation ("uk.ac.starlink:stil:4.3")
 }

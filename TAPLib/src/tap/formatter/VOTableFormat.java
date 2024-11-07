@@ -639,8 +639,11 @@ public class VOTableFormat implements OutputFormat {
 		colInfo.setNullable(true);
 
 		// Set the XType (if any):
-	//	if (votType.xtype != null)
-	//		colInfo.setAuxDatum(new DescribedValue(VOStarTable.XTYPE_INFO, votType.xtype));
+		if (votType.xtype != null) {
+			/** XTYPE has been removed from recent versions of Starlink, hardcoding for "just in case" reasons */
+			ValueInfo XTYPE_INFO = new DefaultValueInfo("xtype", String.class, "VOTable xtype attribute" );
+			colInfo.setAuxDatum(new DescribedValue(XTYPE_INFO, votType.xtype));
+		}
 
 		// Set the additional information: unit, UCD and UType:
 		colInfo.setUnitString(tapCol.getUnit());

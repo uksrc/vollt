@@ -45,6 +45,7 @@ import uws.service.file.UWSFileManager;
 import uws.service.log.UWSLog.LogLevel;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -181,7 +182,7 @@ public final class ConfigurableServiceConnection implements ServiceConnection {
 	 * @throws NullPointerException	If the given properties set is NULL.
 	 * @throws TAPException			If a property is wrong or missing.
 	 */
-	public ConfigurableServiceConnection(final Properties tapConfig) throws NullPointerException, TAPException {
+	public ConfigurableServiceConnection(final Properties tapConfig) throws FileNotFoundException, TAPException {
 		this(tapConfig, null);
 	}
 
@@ -199,9 +200,9 @@ public final class ConfigurableServiceConnection implements ServiceConnection {
 	 * @throws NullPointerException	If the given properties set is NULL.
 	 * @throws TAPException			If a property is wrong or missing.
 	 */
-	public ConfigurableServiceConnection(final Properties tapConfig, final String webAppRootDir) throws NullPointerException, TAPException {
+	public ConfigurableServiceConnection(final Properties tapConfig, final String webAppRootDir) throws FileNotFoundException, TAPException {
 		if (tapConfig == null)
-			throw new NullPointerException("Missing TAP properties! ");
+			throw new FileNotFoundException("Missing TAP properties! ");
 
 		// 1. INITIALIZE THE FILE MANAGER:
 		initFileManager(tapConfig, webAppRootDir);

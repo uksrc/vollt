@@ -98,7 +98,16 @@ publishing {
                     url = 'http://example.com/my-library/'
                 }
             }
-
+        }
+    }
+    repositories {
+        maven {
+            name = "nexus"
+            url = uri("https://repo.dev.uksrc.org/repository/maven-snapshots/")
+            credentials {
+                username = findProperty("nexusUsername") ?: System.getenv("NEXUS_USERNAME")
+                password = findProperty("nexusPassword") ?: System.getenv("NEXUS_PASSWORD")
+            }
         }
     }
 }

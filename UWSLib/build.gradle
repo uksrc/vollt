@@ -1,3 +1,6 @@
+plugins {
+    id 'maven-publish'
+}
 
 // Describe the library:
 version = "4.4"
@@ -17,4 +20,51 @@ dependencies {
     /* Needed to run Gradle with Java 9+: */
     implementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: '3.0.1'
 
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'fr.unistra.cds' // Change this to the correct group
+            artifactId = 'UWSlib' // Change this for each library
+            version = '4.4-SNAPSHOT'
+
+            from components.java
+            pom {
+                name = 'TAPlib'
+                description = 'Java library to deploy a UWS service. This is a cloned version of the original to allow the updating of older java functionality'
+                url = 'http://cdsportal.u-strasbg.fr/uwstuto/'
+
+                licenses {
+                    license {
+                        name = 'GNU Lesser General Public License version 3'
+                        url = 'https://opensource.org/license/lgpl-3-0'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'gmantele'
+                        name = 'Grégory Mantelet'
+                        email = 'gregory.mantelet@astro.u-strasbg.fr'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/slloyd-src/vollt.git'
+                    developerConnection = 'scm:git:ssh://github.com/slloyd-src/vollt.git'
+                    url = 'http://example.com/my-library/'
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "nexus"
+            url = uri("https://repo.dev.uksrc.org/repository/maven-snapshots/")
+            credentials {
+                username = findProperty("nexusUsername") ?: System.getenv("NEXUS_USERNAME")
+                password = findProperty("nexusPassword") ?: System.getenv("NEXUS_PASSWORD")
+            }
+        }
+    }
 }

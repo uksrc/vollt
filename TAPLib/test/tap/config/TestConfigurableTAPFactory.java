@@ -27,9 +27,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-import jakarta.naming.Context;
-import jakarta.naming.InitialContext;
-import jakarta.naming.NamingException;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.h2.jdbc.JdbcSQLException;

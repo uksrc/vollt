@@ -27,10 +27,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.naming.Context;
+import jakarta.naming.InitialContext;
+import jakarta.naming.NamingException;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.h2.jdbc.JdbcSQLException;
 import org.h2.jdbcx.JdbcDataSource;

@@ -37,11 +37,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import tap.ServiceConnection;
 import tap.TAPException;
@@ -113,7 +113,9 @@ public class ConfigurableTAPServlet extends HttpServlet {
 		}finally{
 			try{
 				input.close();
-			}catch(IOException ioe2){}
+			}catch(IOException ioe2){
+				ioe2.printStackTrace();
+			}
 		}
 
 		/* 4. CREATE THE TAP SERVICE */
@@ -127,8 +129,11 @@ public class ConfigurableTAPServlet extends HttpServlet {
 			tap = null;
 			if (ex instanceof TAPException)
 				throw new ServletException(ex.getMessage(), ex.getCause());
-			else
-				throw new ServletException("Impossible to initialize the TAP service!", ex);
+			else {
+				ex.printStackTrace();
+				System.out.println(ex.getMessage());
+				throw new ServletException("Impossible to initialize the TAP services!" + ex.getMessage());
+			}
 		}
 
 		/* 4Bis. SET THE HOME PAGE */

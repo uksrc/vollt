@@ -17,7 +17,7 @@ distributions {
 }
 
 dependencies {
-    implementation 'uk.ac.starlink:stil:4.2'
+    implementation 'uk.ac.starlink:stil:4.3.1'
     implementation 'postgresql:postgresql:9.1-901.jdbc4'
 }
 
@@ -98,7 +98,16 @@ publishing {
                     url = 'http://example.com/my-library/'
                 }
             }
-
+        }
+    }
+    repositories {
+        maven {
+            name = "nexus"
+            url = uri("https://repo.dev.uksrc.org/repository/maven-snapshots/")
+            credentials {
+                username = findProperty("nexusUsername") ?: System.getenv("NEXUS_USERNAME")
+                password = findProperty("nexusPassword") ?: System.getenv("NEXUS_PASSWORD")
+            }
         }
     }
 }

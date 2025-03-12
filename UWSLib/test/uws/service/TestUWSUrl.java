@@ -14,19 +14,8 @@ import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 
-import jakarta.servlet.AsyncContext;
-import jakarta.servlet.DispatcherType;
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletInputStream;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -121,12 +110,32 @@ public class TestUWSUrl {
 		}
 
 		@Override
+		public long getContentLengthLong() {
+			return 0;
+		}
+
+		@Override
 		public String getContentType(){
 			return null;
 		}
 
 		@Override
 		public DispatcherType getDispatcherType(){
+			return null;
+		}
+
+		@Override
+		public String getRequestId() {
+			return "";
+		}
+
+		@Override
+		public String getProtocolRequestId() {
+			return "";
+		}
+
+		@Override
+		public ServletConnection getServletConnection() {
 			return null;
 		}
 
@@ -187,11 +196,6 @@ public class TestUWSUrl {
 
 		@Override
 		public BufferedReader getReader() throws IOException{
-			return null;
-		}
-
-		@Override
-		public String getRealPath(String arg0){
 			return null;
 		}
 
@@ -311,6 +315,11 @@ public class TestUWSUrl {
 		}
 
 		@Override
+		public <T extends HttpUpgradeHandler> T upgrade(Class<T> aClass) throws IOException, ServletException {
+			return null;
+		}
+
+		@Override
 		public Collection<Part> getParts() throws IOException, IllegalStateException, ServletException{
 			return null;
 		}
@@ -341,6 +350,11 @@ public class TestUWSUrl {
 		}
 
 		@Override
+		public String changeSessionId() {
+			return "";
+		}
+
+		@Override
 		public HttpSession getSession(boolean arg0){
 			return null;
 		}
@@ -357,11 +371,6 @@ public class TestUWSUrl {
 
 		@Override
 		public boolean isRequestedSessionIdFromURL(){
-			return false;
-		}
-
-		@Override
-		public boolean isRequestedSessionIdFromUrl(){
 			return false;
 		}
 

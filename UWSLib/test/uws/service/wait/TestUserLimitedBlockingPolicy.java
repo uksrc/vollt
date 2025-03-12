@@ -19,19 +19,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import jakarta.servlet.AsyncContext;
-import jakarta.servlet.DispatcherType;
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletInputStream;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -476,11 +465,6 @@ public class TestUserLimitedBlockingPolicy {
 		}
 
 		@Override
-		public String getRealPath(String arg0){
-			return null;
-		}
-
-		@Override
 		public BufferedReader getReader() throws IOException{
 			return null;
 		}
@@ -526,12 +510,32 @@ public class TestUserLimitedBlockingPolicy {
 		}
 
 		@Override
+		public String getRequestId() {
+			return "";
+		}
+
+		@Override
+		public String getProtocolRequestId() {
+			return "";
+		}
+
+		@Override
+		public ServletConnection getServletConnection() {
+			return null;
+		}
+
+		@Override
 		public String getContentType(){
 			return null;
 		}
 
 		@Override
 		public int getContentLength(){
+			return 0;
+		}
+
+		@Override
+		public long getContentLengthLong() {
 			return 0;
 		}
 
@@ -572,11 +576,6 @@ public class TestUserLimitedBlockingPolicy {
 		}
 
 		@Override
-		public boolean isRequestedSessionIdFromUrl(){
-			return false;
-		}
-
-		@Override
 		public boolean isRequestedSessionIdFromURL(){
 			return false;
 		}
@@ -599,6 +598,11 @@ public class TestUserLimitedBlockingPolicy {
 		@Override
 		public HttpSession getSession(){
 			return null;
+		}
+
+		@Override
+		public String changeSessionId() {
+			return "";
 		}
 
 		@Override
@@ -648,6 +652,11 @@ public class TestUserLimitedBlockingPolicy {
 
 		@Override
 		public Part getPart(String arg0) throws IOException, IllegalStateException, ServletException{
+			return null;
+		}
+
+		@Override
+		public <T extends HttpUpgradeHandler> T upgrade(Class<T> aClass) throws IOException, ServletException {
 			return null;
 		}
 
